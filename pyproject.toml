@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bolt"
+version = "1.0.0"
+description = "BOLT: Quantitative Microstructure & Adversarial AI Trading Engine"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+    "httpx>=0.27.0",
+    "aiosqlite>=0.20.0",
+    "numpy>=1.26.0",
+    "pandas>=2.2.0",
+    "eth-account>=0.11.0",
+]
+
+[project.optional-dependencies]
+venues = [
+    "hyperliquid-python-sdk>=0.4.0",
+    "py-clob-client>=0.17.0",
+    "aiogram>=3.4.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:pytest_ethereum"
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "asyncio: mark a test as an asyncio coroutine",
+]
